@@ -1,40 +1,57 @@
-import altair as alt
-import numpy as np
-import pandas as pd
 import streamlit as st
+from PIL import Image
 
-"""
-# Welcome to Streamlit!
+# Set the title of the page
+st.title("Docker Cluster Setup")
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:.
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
+# Add a description of the task
+st.markdown("""
+## Section 1: Docker Cluster Setup
 
-In the meantime, below is an example of what you can do with just a few lines of code:
-"""
+This section provides instructions and screenshots for creating a Docker cluster with 1 master node, 3 worker nodes, and a node for JupyterLab. Worker 3 has exposed port 8083 through the web interface.
 
-num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
-num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
+### Steps Included:
+1. **Create a Docker Cluster** with 1 master node and 3 worker nodes.
+2. **Set Up a JupyterLab Node** in the cluster.
+3. **Expose Port 8083** on Worker 3 for web interface access.
+""")
 
-indices = np.linspace(0, 1, num_points)
-theta = 2 * np.pi * num_turns * indices
-radius = indices
+# Display the image of the Docker cluster setup
+image = Image.open('imgs/course_project2.png')
+st.image(image, caption='Docker Cluster Setup', use_column_width=True)
 
-x = radius * np.cos(theta)
-y = radius * np.sin(theta)
+# Add detailed instructions
+st.markdown("""
+### Detailed Instructions:
 
-df = pd.DataFrame({
-    "x": x,
-    "y": y,
-    "idx": indices,
-    "rand": np.random.randn(num_points),
-})
+1. **Set Up Docker Environment:**
+   - Install Docker on your local machine.
+   - Pull the necessary Docker images for the master and worker nodes.
 
-st.altair_chart(alt.Chart(df, height=700, width=700)
-    .mark_point(filled=True)
-    .encode(
-        x=alt.X("x", axis=None),
-        y=alt.Y("y", axis=None),
-        color=alt.Color("idx", legend=None, scale=alt.Scale()),
-        size=alt.Size("rand", legend=None, scale=alt.Scale(range=[1, 150])),
-    ))
+2. **Create Master Node:**
+   - Run a Docker container for the master node.
+   - Configure the master node settings as per the instructions.
+
+3. **Create Worker Nodes:**
+   - Run Docker containers for three worker nodes.
+   - Configure each worker node to connect to the master node.
+
+4. **Set Up JupyterLab Node:**
+   - Run a Docker container for JupyterLab.
+   - Ensure JupyterLab is accessible within the cluster network.
+
+5. **Expose Port 8083 on Worker 3:**
+   - Use Docker commands to expose port 8083 on Worker 3.
+   - Verify that the port is accessible from the web interface.
+
+### Screenshots:
+
+Below there's a PDF with basic instructions and screenshots showing the process of me setting up the cluster.
+            
+            (Work in progress)
+""")
+
+# You can add more images or screenshots as needed
+# st.image('path_to_screenshot_1.png', caption='Step 1: Description')
+# st.image('path_to_screenshot_2.png', caption='Step 2: Description')
+
