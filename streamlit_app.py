@@ -2,7 +2,8 @@ import streamlit as st
 from PIL import Image
 
 st.title("Docker Cluster Projects")
-
+image = Image.open('imgs/course_project2.png')
+st.image(image, caption='Docker Cluster Setup', use_column_width=True)
 st.markdown("""
 ## Project 1: Docker Cluster Setup
 
